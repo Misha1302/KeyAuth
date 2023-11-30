@@ -1,18 +1,17 @@
 namespace KeyAuth;
 
-using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
-[PrimaryKey(nameof(Key))]
+// ReSharper disable NotAccessedPositionalProperty.Global
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 public class KeyInfo
 {
+    [Key]
+    public int Id { get; set; }
+
     public string Key { get; set; } = default!;
     public string FullName { get; set; } = default!;
-    public int ActivatedCount { get; set; } = default!;
+    public int ActivatedCount { get; set; }
 }
 
-[PrimaryKey(nameof(Key))]
-public class KeyAddInfo
-{
-    public string Key { get; set; } = default!;
-    public string FullName { get; set; } = default!;
-}
+public record KeyAddInfo(string Key, string FullName, string Password);
